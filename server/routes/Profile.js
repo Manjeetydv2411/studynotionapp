@@ -1,6 +1,8 @@
 const express = require("express")
 const router = express.Router()
 const { auth, isInstructor } = require("../middlewares/auth")
+// console.log("AUTH:", typeof auth)
+// console.log("IS INSTRUCTOR:", typeof isInstructor)
 const {
   deleteAccount,
   updateProfile,

@@ -536,32 +536,43 @@ exports.deleteCourse = async (req, res) => {
 
     // Find the course
     const course = await Course.findById(courseId)
-    if (!course) {
-      return res.status(404).json({ message: "Course not found" })
-    }
 
-    // Unenroll students from the course
-    const studentsEnrolled = course.studentsEnroled
-    for (const studentId of studentsEnrolled) {
-      await User.findByIdAndUpdate(studentId, {
-        $pull: { courses: courseId },
+    if (!course) {
+      return res.status(404).json({
+        success: false,
+        message: "Course not found",
       })
     }
 
-    // Delete sections and sub-sections
-    const courseSections = course.courseContent
+    // Unenroll students from the course
+    const studentsEnrolled = course.studentsEnrolled || []
+
+    for (const studentId of studentsEnrolled) {
+      await User.findByIdAndUpdate(studentId, {
+        $pull: {
+          courses: courseId,
+        },
+      })
+    }
+
+    // Delete all sections and their sub-sections
+    const courseSections = course.courseContent || []
+
     for (const sectionId of courseSections) {
-      // Delete sub-sections of the section
+      // Find section
       const section = await Section.findById(sectionId)
+
       if (section) {
-        const subSections = section.subSection
+        // Delete all sub-sections
+        const subSections = section.subSection || []
+
         for (const subSectionId of subSections) {
           await SubSection.findByIdAndDelete(subSectionId)
         }
-      }
 
-      // Delete the section
-      await Section.findByIdAndDelete(sectionId)
+        // Delete section
+        await Section.findByIdAndDelete(sectionId)
+      }
     }
 
     // Delete the course
@@ -572,7 +583,8 @@ exports.deleteCourse = async (req, res) => {
       message: "Course deleted successfully",
     })
   } catch (error) {
-    console.error(error)
+    console.error("DELETE COURSE ERROR:", error)
+
     return res.status(500).json({
       success: false,
       message: "Server error",

@@ -9,9 +9,7 @@ export const apiConnector = (
     headers,
     params
 ) => {
-    const token = localStorage.getItem("token")
-        ? JSON.parse(localStorage.getItem("token"))
-        : null;
+    const token = localStorage.getItem("token") || null;
 
     return axiosInstance({
         method: method,

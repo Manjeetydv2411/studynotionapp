@@ -13,6 +13,7 @@ const {
 } = settingsEndpoints
 
 export function updateDisplayPicture(token, formData) {
+  console.log("TOKEN IN SETTINGS API:", token)
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     try {

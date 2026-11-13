@@ -249,6 +249,12 @@ exports.login = async (req, res) => {
             accountType: user.accountType,
         };
 
+
+        console.log("LOGIN JWT SECRET LOADED:", !!process.env.JWT_SECRET)
+        console.log(
+    "LOGIN JWT SECRET LENGTH:",
+    process.env.JWT_SECRET?.length
+)
         // Generate token
         const token = JWT.sign(
             payload,
@@ -257,6 +263,8 @@ exports.login = async (req, res) => {
                 expiresIn: "2h",
             }
         );
+        console.log("LOGIN TOKEN LENGTH:", token.length);
+        console.log("LOGIN TOKEN PARTS:", token.split(".").length);
 
         // Add token to user
         user.token = token;
@@ -269,6 +277,7 @@ exports.login = async (req, res) => {
             ),
             httpOnly: true,
         };
+        console.log("🔥 LOGIN SUCCESS RESPONSE")
 
         // Send response
         return res

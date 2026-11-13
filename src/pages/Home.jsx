@@ -45,14 +45,15 @@ function Home() {
         </div>
 
         {/* CTA Buttons */}
-        <div className="mt-8 flex flex-row gap-7">
-          <CTAButton active={true} linkto={"/signup"}>
-            Learn More
-          </CTAButton>
-          <CTAButton active={false} linkto={"/login"}>
-            Book a Demo
-          </CTAButton>
-        </div>
+       <div className="mt-8 flex flex-row gap-7">
+  <CTAButton active={true} linkto={"/about"}>
+    Learn More
+  </CTAButton>
+
+  <CTAButton active={false} linkto={"/contact"}>
+    Book a Demo
+  </CTAButton>
+</div>
 
         {/* Video */}
         <div className="mx-3 my-7 shadow-[10px_-5px_50px_-5px] shadow-blue-200">
@@ -87,7 +88,7 @@ function Home() {
             }}
             ctabtn2={{
               btnText: "Learn More",
-              link: "/signup",
+              link: "/about",
               active: false,
             }}
             codeColor={"text-yellow-25"}
@@ -111,12 +112,12 @@ function Home() {
             }
             ctabtn1={{
               btnText: "Continue Lesson",
-              link: "/signup",
+              link: "/login",
               active: true,
             }}
             ctabtn2={{
               btnText: "Learn More",
-              link: "/signup",
+              link: "/about",
               active: false,
             }}
             codeColor={"text-white"}
@@ -142,7 +143,7 @@ function Home() {
                   <FaArrowRight />
                 </div>
               </CTAButton>
-              <CTAButton active={false} linkto={"/login"}>
+              <CTAButton active={false} linkto={"/about"}>
                 Learn More
               </CTAButton>
             </div>
@@ -162,7 +163,7 @@ function Home() {
                 be a competitive specialist requires more than professional
                 skills.
               </div>
-              <CTAButton active={true} linkto={"/signup"}>
+              <CTAButton active={true} linkto={"/about"}>
                 <div className="">Learn More</div>
               </CTAButton>
             </div>

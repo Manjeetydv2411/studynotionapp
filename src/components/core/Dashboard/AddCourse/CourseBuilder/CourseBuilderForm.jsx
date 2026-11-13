@@ -59,6 +59,12 @@ export default function CourseBuilderForm() {
     }
     if (result) {
       // console.log("section result", result)
+      console.log("SECTION RESULT:", JSON.stringify(result, null, 2))
+console.log(
+  "COURSE CONTENT:",
+  JSON.stringify(result.courseContent, null, 2)
+)
+
       dispatch(setCourse(result))
       setEditSectionName(null)
       setValue("sectionName", "")
@@ -85,12 +91,14 @@ export default function CourseBuilderForm() {
       toast.error("Please add atleast one section")
       return
     }
-    if (
-      course.courseContent.some((section) => section.subSection.length === 0)
-    ) {
-      toast.error("Please add atleast one lecture in each section")
-      return
-    }
+   if (
+  course.courseContent.some(
+    (section) => !section.subSection || section.subSection.length === 0
+  )
+) {
+  toast.error("Please add atleast one lecture in each section")
+  return
+}
     dispatch(setStep(3))
   }
 

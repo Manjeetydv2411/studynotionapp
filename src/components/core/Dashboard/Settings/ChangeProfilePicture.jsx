@@ -40,6 +40,7 @@ export default function ChangeProfilePicture() {
   const handleFileUpload = () => {
     try {
       console.log("uploading...")
+       console.log("TOKEN IN CHANGE PROFILE:", token)
       setLoading(true)
       const formData = new FormData()
       formData.append("displayPicture", imageFile)
